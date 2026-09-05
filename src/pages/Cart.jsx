@@ -1,0 +1,11 @@
+import { Link } from "react-router-dom";
+import { Trash2, Minus, Plus, ArrowRight } from "lucide-react";
+import { useCart } from "../context/CartContext";
+export default function Cart(){
+ const {cart,total,updateQty,removeFromCart}=useCart();
+ return <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16"><p className="text-xs font-bold uppercase tracking-[.2em] text-slate-400">Your selection</p><h1 className="mt-2 font-display text-5xl">Shopping Bag</h1>
+ {!cart.length?<div className="py-24 text-center"><p className="text-slate-500">Your bag is beautifully empty.</p><Link to="/shop" className="mt-6 inline-flex rounded-full bg-elora-navy px-6 py-3 text-sm font-bold text-white">Continue Shopping</Link></div>:
+ <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_360px]"><div className="space-y-3">{cart.map(item=><div key={item.id} className="flex gap-4 rounded-3xl bg-white p-4 dark:bg-white/[.04]"><img src={item.thumbnail} className="h-28 w-28 rounded-2xl bg-slate-100 object-cover"/><div className="min-w-0 flex-1"><h3 className="font-semibold">{item.title}</h3><p className="mt-2 font-bold">${item.price.toFixed(2)}</p><div className="mt-3 flex items-center gap-2"><div className="flex items-center rounded-full border border-slate-200 dark:border-white/10"><button onClick={()=>updateQty(item.id,item.qty-1)} className="p-2"><Minus size={14}/></button><span className="w-7 text-center text-xs">{item.qty}</span><button onClick={()=>updateQty(item.id,item.qty+1)} className="p-2"><Plus size={14}/></button></div></div></div><button onClick={()=>removeFromCart(item.id)} className="self-start rounded-full p-2 text-slate-400 hover:text-red-500"><Trash2 size={17}/></button></div>)}</div>
+ <aside className="h-fit rounded-[2rem] bg-elora-blue/60 p-7"><h2 className="font-display text-2xl">Order Summary</h2><div className="mt-6 flex justify-between text-sm"><span>Subtotal</span><b>${total.toFixed(2)}</b></div><div className="mt-3 flex justify-between text-sm"><span>Shipping</span><b>Free</b></div><div className="my-6 border-t border-elora-navy/10 pt-5 flex justify-between text-lg"><span>Total</span><b>${total.toFixed(2)}</b></div><Link to="/checkout" className="flex items-center justify-center gap-2 rounded-full bg-elora-navy py-3.5 text-sm font-bold text-white">Checkout <ArrowRight size={16}/></Link></aside>
+ </div>}</section>
+}

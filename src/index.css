@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap');
+@import "tailwindcss";
+
+/* Elora theme: dark: utilities are controlled by the .dark class, not the OS theme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "DM Sans", sans-serif;
+  --font-display: "Playfair Display", serif;
+  --color-elora-blue: #A9C9D8;
+  --color-elora-blush: #E8B4B0;
+  --color-elora-cream: #FAF8F5;
+  --color-elora-navy: #182536;
+  --color-elora-dark: #101820;
+  --color-elora-muted: #6B7280;
+}
+
+:root { font-family: "DM Sans", sans-serif; color: #182536; background: #FAF8F5; font-synthesis: none; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: #FAF8F5; }
+button, a, input, select { -webkit-tap-highlight-color: transparent; }
+::selection { background: #A9C9D8; color: #182536; }
+.dark body { background: #101820; }
+.dark input, .dark select { color-scheme: dark; }
+
+.input{margin-top:.5rem;width:100%;border-radius:1rem;border:1px solid rgb(226 232 240);background:transparent;padding:.875rem 1rem;outline:none}.dark .input{border-color:rgb(255 255 255 / .1)}
+
+
+/* ===== ELORA LIGHT MODE BASE ===== */
+:root {
+  color-scheme: light;
+  --elora-page: #FAF8F5;
+  --elora-surface: #FFFFFF;
+  --elora-soft: #F8F5F0;
+  --elora-border: #E2E8F0;
+  --elora-text: #182536;
+  --elora-muted-text: #6B7280;
+}
+
+html:not(.dark) {
+  background: var(--elora-page);
+  color-scheme: light;
+}
+
+html:not(.dark) body {
+  background: var(--elora-page);
+  color: var(--elora-text);
+}
+
+/* Keep common surfaces/light controls genuinely light. */
+html:not(.dark) .bg-white { background-color: #FFFFFF; }
+html:not(.dark) .bg-slate-50 { background-color: #F8FAFC; }
+html:not(.dark) .bg-slate-100 { background-color: #F1F5F9; }
+html:not(.dark) .text-slate-400 { color: #94A3B8; }
+html:not(.dark) .text-slate-500 { color: #64748B; }
+html:not(.dark) .border-slate-100 { border-color: #F1F5F9; }
+html:not(.dark) .border-slate-200 { border-color: #E2E8F0; }
+
+/* Inputs/selects in light mode */
+html:not(.dark) input,
+html:not(.dark) select,
+html:not(.dark) textarea {
+  color-scheme: light;
+  color: #182536;
+}
+
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #94A3B8;
+}
+
+/* ===== ELORA DARK MODE ===== */
+html.dark {
+  background: #101820;
+  color-scheme: dark;
+}
+
+html.dark body {
+  background: #101820;
+  color: #FFFFFF;
+}
+
+/* Components that do not yet have their own dark: class */
+html.dark .bg-white { background-color: #182536; }
+html.dark .bg-slate-50 { background-color: #182536; }
+html.dark .bg-slate-100 { background-color: rgba(255,255,255,.05); }
+html.dark .text-slate-400 { color: #94A3B8; }
+html.dark .text-slate-500 { color: #AAB4C0; }
+html.dark .border-slate-100,
+html.dark .border-slate-200 { border-color: rgba(255,255,255,.10); }
+
+/* Prevent dark-mode white surfaces from making text unreadable. */
+html.dark .bg-white .text-elora-navy,
+html.dark .bg-white .text-slate-500,
+html.dark .bg-white .text-slate-400 { color: #AAB4C0; }
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  color-scheme: dark;
+  color: #FFFFFF;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #94A3B8;
+}
+
+/* Theme transition */
+body, header, main, section, footer, article, input, select, textarea, button {
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
